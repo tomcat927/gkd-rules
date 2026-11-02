@@ -1,0 +1,41 @@
+{
+  id: 1,
+  name: 'tomcat927 自定义订阅',
+  version: 1,
+  author: 'tomcat927',
+  description: '自用规则。酷安开屏广告:节点匹配跳过按钮,排除主界面/搜索页/Feed页,最多点击一次。',
+  apps: [
+    {
+      id: 'com.coolapk.market',
+      name: '酷安',
+      groups: [
+        {
+          key: -1,
+          name: '开屏广告',
+          desc: '点击跳过按钮;排除主界面(MainActivity)/搜索/Feed页,防止广告关闭后误点',
+          matchTime: 10000,
+          actionMaximum: 1,
+          resetMatch: 'app',
+          excludeActivityIds: [
+            'com.coolapk.market.view.main.MainActivity',
+            'com.coolapk.market.view.search.',
+            'com.coolapk.market.view.feed.',
+          ],
+          rules: [
+            {
+              quickFind: true,
+              key: 0,
+              matches: '[id$="tt_splash_skip_btn"] <<n [id="com.coolapk.market:id/ad_container"]',
+            },
+            {
+              quickFind: true,
+              key: 1,
+              matches: '[text^="跳过"][text.length<=4]',
+              excludeMatches: '[id="com.coolapk.market:id/item_view"]',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}
